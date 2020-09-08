@@ -2,7 +2,7 @@ name: deploy-auth
 
 on:
   push:
-    branches: 
+    branches:
       - master
     paths:
       - 'auth/**'
@@ -26,3 +26,12 @@ jobs:
       - name: testing AWS CLI
         run: |
           aws ec2 describe-instances
+      - name: ls after SSH connexion
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /
+            ls
+          host: ${{ secrets.KOPS_PUBLIC_DNS }}
+          user: bitnami
+          key: ${{ secrets.MICROSERVICE_KOPS_KEYPAIR}}
