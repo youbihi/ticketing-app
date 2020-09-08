@@ -2,10 +2,10 @@ name: deploy-manifests
 
 on:
   push:
-    branches: 
+    branches:
       - master
     paths:
-      - 'auth/**'
+      - 'infra/**'
 jobs:
   build:
     runs-on: ubuntu-latest
