@@ -20,3 +20,15 @@ jobs:
       - name: testing AWS CLI
         run: |
           aws ec2 describe-instances
+      - name: deploying kubernete infra manifest
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /home/bitnami/ticketing-app
+            git remote add origin https://github.com/youbihi/ticketing-app.git
+            git fetch origin
+            git checkout origin/master -- infra/
+
+          host: ${{ secrets.KOPS_PUBLIC_DNS }}
+          user: bitnami
+          key: ${{ secrets.MICROSERVICE_KOPS_KEYPAIR}}
