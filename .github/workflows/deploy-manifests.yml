@@ -27,7 +27,8 @@ jobs:
             cd /home/bitnami/ticketing-app
             git remote add origin https://github.com/youbihi/ticketing-app.git
             git fetch origin
-            git checkout origin/master -- infra/
+            git checkout origin/master -- infra/k8s
+            git checkout origin/master -- infra/k8s-prod
 
           host: ${{ secrets.KOPS_PUBLIC_DNS }}
           user: bitnami
