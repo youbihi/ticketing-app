@@ -17,21 +17,13 @@ jobs:
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       - run: docker push youbihi/auth
-      - name: Configure AWS gihub action credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
-      - name: testing AWS CLI
-        run: |
-          aws ec2 describe-instances
       - name: ls after SSH connexion
         uses: fifsky/ssh-action@master
         with:
           command: |
-            cd /
-            ls
+            cd /home/bitnami/ticketing-app/infra/k8s
+            kubectl apply -f .
+            kubectl rollout restart deployment auth-depl
           host: ${{ secrets.KOPS_PUBLIC_DNS }}
           user: bitnami
           key: ${{ secrets.MICROSERVICE_KOPS_KEYPAIR}}
