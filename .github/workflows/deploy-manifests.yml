@@ -29,7 +29,10 @@ jobs:
             git fetch origin
             git checkout origin/master -- infra/k8s
             git checkout origin/master -- infra/k8s-prod
-
+            cd /home/bitnami/ticketing-app/infra/k8s
+            kubectl apply -f .
+            cd /home/bitnami/ticketing-app/infra/k8s-prod
+            kubectl apply -f .
           host: ${{ secrets.KOPS_PUBLIC_DNS }}
           user: bitnami
           key: ${{ secrets.MICROSERVICE_KOPS_KEYPAIR}}
