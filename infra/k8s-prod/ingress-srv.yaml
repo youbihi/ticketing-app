@@ -4,10 +4,10 @@ metadata:
   name: ingress-service
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
-    - host: a07ec6cf0da1449569b936139a20d9bb-3b545d3c338df4e9.elb.eu-west-1.amazonaws.com
+    - host: a49abef180fd747c2988a93a9cb7a6eb-9d5c253e918cbe5a.elb.eu-west-1.amazonaws.com
       http:
         paths:
           - path: /api/payments/?(.*)
