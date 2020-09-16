@@ -17,8 +17,8 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: youbihi/client
-      context: client
+    - image: youbihi/front-client
+      context: front-client
       docker:
         dockerfile: Dockerfile
       sync:

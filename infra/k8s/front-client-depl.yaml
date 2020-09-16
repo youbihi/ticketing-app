@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-client-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front-client
+  template:
+    metadata:
+      labels:
+        app: front-client
+    spec:
+      containers:
+        - name: front-client
+          image: youbihi/front-client
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-client-srv
+spec:
+  selector:
+    app: front-client
+  ports:
+    - name: front-client
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
