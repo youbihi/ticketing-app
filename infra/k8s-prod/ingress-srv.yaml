@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
-    - host: a49abef180fd747c2988a93a9cb7a6eb-9d5c253e918cbe5a.elb.eu-west-1.amazonaws.com
+    - host: ab6802016dae84be084b9dd305d2531b-d5ffab3461c9ac73.elb.eu-west-1.amazonaws.com
       http:
         paths:
           - path: /api/payments/?(.*)
