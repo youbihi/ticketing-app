@@ -1,15 +1,60 @@
 import React from 'react';
-import PostCreate from './PostCreate';
-import PostList from './PostList';
+import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-export default () => {
+import Header from './components/header';
+import HomePage from './pages/HomePage';
+import SignupPage from './pages/SignupPage';
+import SigninPage from './pages/SigninPage';
+import OrdersPage from './pages/OrdersPage';
+import OrderDetailsPage from './pages/OrderDetailsPage';
+import AddTicketPage from './pages/AddTicketPage';
+import TicketDetailsPage from './pages/TicketDetailsPage';
+import SignoutPage from './pages/SignoutPage';
+
+const App = ({ location }) => {
+  console.log('cook');
   return (
     <div className="container">
-      <h1>Airline ticketing app</h1>
-      <PostCreate />
-      <hr />
-      <h1>BlogPost</h1>
-      <PostList />
+      <Header currentUser={useSelector((state) => state.user)} />
+
+      <Route location={location} path="/" exact component={HomePage} />
+      <Route location={location} path="/signup" exact component={SignupPage} />
+      <Route location={location} path="/signin" exact component={SigninPage} />
+      <Route location={location} path="/orders" exact component={OrdersPage} />
+      <Route
+        location={location}
+        path="/signout"
+        exact
+        component={SignoutPage}
+      />
+      <Route
+        location={location}
+        path="/orderdetails"
+        exact
+        component={OrderDetailsPage}
+      />
+      <Route
+        location={location}
+        path="/addticket"
+        exact
+        component={AddTicketPage}
+      />
+      <Route
+        location={location}
+        path="/viewticket"
+        exact
+        component={TicketDetailsPage}
+      />
     </div>
   );
 };
+
+App.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default App;
