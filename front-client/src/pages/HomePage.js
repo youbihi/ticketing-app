@@ -48,7 +48,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>Bellow all tickets available</h1>
+      <h2>Bellow all tickets available</h2>
       <table className="table">
         <thead>
           <tr>
