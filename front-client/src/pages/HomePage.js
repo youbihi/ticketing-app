@@ -1,50 +1,31 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import api from '../api/api';
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-
-  const fetchTickets = async () => {
-    const { data } = await api.ticket.getall().then((data) =>
-      dispatch({
-        type: 'TICKET_FETCHED',
-        data,
-      })
-    );
-
-    return { tickets: data };
-  };
+  const [tickets_list, setTickets_list] = useState([]);
 
   useEffect(() => {
-    fetchTickets();
+    api.ticket.getall().then((data) => setTickets_list(data));
   }, []);
 
-  const tickets = useSelector((state) => state.ticket_list);
+  console.log('state ticket list: ', tickets_list);
 
-  const ticketList = () => {
-    if (tickets) {
-      return tickets.map((ticket) => {
-        return (
-          <tr key={ticket.id}>
-            <td>{ticket.title}</td>
-            <td>{ticket.price}</td>
-            <td>
-              <Link to={`/tickets/${ticket.id}`}>
-                <a>View</a>
-              </Link>
-            </td>
-          </tr>
-        );
-      });
-    } else {
-      return null;
-    }
-  };
+  const ticketList = tickets_list.map((ticket) => {
+    return (
+      <tr key={ticket.id}>
+        <td>{ticket.title}</td>
+        <td>{ticket.price} €</td>
+        <td>
+          <Link to={`/tickets/${ticket.id}`}>
+            <a>View</a>
+          </Link>
+        </td>
+      </tr>
+    );
+  });
 
   return (
     <div>
@@ -57,7 +38,7 @@ const HomePage = () => {
             <th>Link</th>
           </tr>
         </thead>
-        {ticketList ? <tbody>{ticketList}</tbody> : null}
+        {{ ticketList } ? <tbody>{ticketList}</tbody> : null}
       </table>
     </div>
   );
