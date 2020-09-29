@@ -19,7 +19,7 @@ const HomePage = () => {
         <td>{ticket.title}</td>
         <td>{ticket.price} €</td>
         <td>
-          <Link to={`/tickets/${ticket.id}`}>
+          <Link to={{ pathname: `/tickets/view-ticket`, state: { ticket } }}>
             <a>View</a>
           </Link>
         </td>

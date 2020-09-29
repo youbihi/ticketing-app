@@ -43,7 +43,7 @@ const App = ({ location }) => {
       />
       <Route
         location={location}
-        path="/viewticket"
+        path="/tickets/view-ticket"
         exact
         component={TicketDetailsPage}
       />
