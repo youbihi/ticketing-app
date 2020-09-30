@@ -6,9 +6,15 @@ import { useHistory } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 
 const TicketDetails = (ticket) => {
-  const [ticketDetails, setTicketDetails] = useState({});
+  const [ticketDetails, setTicketDetails] = useState({ ticketId: '' });
 
   let history = useHistory();
+
+  useEffect(() => {
+    setTicketDetails(ticket);
+  }, [ticket]);
+
+  console.log('ticket details : ', ticketDetails);
 
   const { doRequest, errors } = useRequest({
     url: '/api/orders',
@@ -16,14 +22,14 @@ const TicketDetails = (ticket) => {
     body: {
       ticketId: ticket.id,
     },
-    onSuccess: (order) => history.push(`/orders/${order.id}`),
+    onSuccess: (order) => history.push(`/orderdetails`, order),
   });
 
-  useEffect(() => {
-    setTicketDetails(ticket);
-  }, [ticket]);
-
-  console.log('ticket details : ', ticketDetails);
+  const onSubmit = async () => {
+    await doRequest({
+      ticketId: ticketDetails.ticket.id,
+    });
+  };
 
   return (
     <div>
@@ -35,7 +41,7 @@ const TicketDetails = (ticket) => {
         </div>
       ) : null}
       {errors}
-      <button onClick={() => doRequest()} className="btn btn-primary">
+      <button onClick={() => onSubmit()} className="btn btn-primary">
         Purchase
       </button>
     </div>

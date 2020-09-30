@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 export default ({ url, method, body, onSuccess }) => {
   const [errors, setErrors] = useState(null);
+  console.log('body of the request received my use request : ', body);
 
   const doRequest = async (props = {}) => {
     try {

@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import OrderDetails from '../components/OrderDetails';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-class OrderDetailsPage extends Component {
-  render() {
-    //need to get all the data about the order and the user
+const OrderDetailsPage = () => {
+  const location = useLocation();
 
-    return (
-      <div>
-        <OrderDetails
-          order={{
-            id: '546546ds4dqsd',
-            status: 'ongoin',
-            ticket: { title: 'title blabla', price: 50 },
-          }}
-          currentUser={{ id: 'uhdsiudsgsiu', email: 'dsgyqusd@oidjsqs.com' }}
-        />
-      </div>
-    );
-  }
-}
+  console.log('location.state: ', location.state);
+
+  return (
+    <div>
+      <OrderDetails
+        order={location.state}
+        currentUser={useSelector((state) => state.user)}
+      />
+    </div>
+  );
+};
 
 export default OrderDetailsPage;
