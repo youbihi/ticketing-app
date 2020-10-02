@@ -29,7 +29,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h2>Bellow all tickets available</h2>
+      <h2>Bellow all tickets available sold by people</h2>
       <table className="table">
         <thead>
           <tr>
