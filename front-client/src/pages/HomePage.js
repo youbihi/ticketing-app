@@ -37,7 +37,7 @@ const HomePage = () => {
             <th>Title</th>
             <th>Price</th>
             <th>Link</th>
-            <th>Owner</th>
+            <th>Owner ID</th>
           </tr>
         </thead>
         {{ ticketList } ? <tbody>{ticketList}</tbody> : null}

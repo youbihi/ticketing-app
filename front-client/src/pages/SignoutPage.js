@@ -13,9 +13,9 @@ const SignoutPage = () => {
     url: '/api/users/signout',
     method: 'post',
     body: {},
-    onSuccess: (ticket) =>
+    onSuccess: () =>
       dispatch({
-        type: 'USER_LOGOUT',
+        type: 'USER_LOGGED_OUT',
         payload: {},
       }).then(history.push('/')),
   });

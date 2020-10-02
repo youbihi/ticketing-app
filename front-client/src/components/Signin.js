@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import useRequest from '../hooks/use-request';
 import { useHistory } from 'react-router-dom';
 
 const Signin = () => {
   let history = useHistory();
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { doRequest, errors } = useRequest({
@@ -15,7 +18,11 @@ const Signin = () => {
       email,
       password,
     },
-    onSuccess: () => history.push('/'),
+    onSuccess: (user) =>
+      dispatch({
+        type: 'USER_LOGGED_IN',
+        user,
+      }).then(history.push('/')),
   });
 
   const onSubmit = async (event) => {
