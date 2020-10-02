@@ -1,14 +1,21 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 
 const OrdersList = ({ orders }) => {
   let allmyorders = [orders].map((order) => {
-    return (
-      <tr key={order.id}>
-        <td>{order.ticket.title}</td>
-        <td>{order.status}</td>
-        <td>{order.ticket.price}</td>
-      </tr>
-    );
+    console.log('all the orders: ', orders);
+    if (order.id) {
+      console.log('here is the order: ', order);
+      return (
+        <tr key={order.id}>
+          <td>{order.ticket.title}</td>
+          <td>{order.status}</td>
+          <td>{order.ticket.price}</td>
+        </tr>
+      );
+    } else {
+      return null;
+    }
   });
 
   return (
@@ -23,7 +30,7 @@ const OrdersList = ({ orders }) => {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>{allmyorders}</tbody>
+          {allmyorders ? <tbody>{allmyorders}</tbody> : null}
         </table>
       </div>
     </ul>

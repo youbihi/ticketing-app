@@ -23,19 +23,21 @@ const HomePage = () => {
             <a>View</a>
           </Link>
         </td>
+        <td>{ticket.userId}</td>
       </tr>
     );
   });
 
   return (
     <div>
-      <h2>Bellow all tickets available sold by people</h2>
+      <h2>Bellow all tickets available</h2>
       <table className="table">
         <thead>
           <tr>
             <th>Title</th>
             <th>Price</th>
             <th>Link</th>
+            <th>Owner</th>
           </tr>
         </thead>
         {{ ticketList } ? <tbody>{ticketList}</tbody> : null}

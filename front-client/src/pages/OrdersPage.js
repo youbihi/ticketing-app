@@ -12,11 +12,7 @@ const OrdersPage = () => {
     api.order.getall().then((data) => setOrders_list(data));
   }, []);
 
-  return (
-    <div>
-      <OrdersList orders={orders_list} />
-    </div>
-  );
+  return <div>{orders_list ? <OrdersList orders={orders_list} /> : null}</div>;
 };
 
 export default OrdersPage;
