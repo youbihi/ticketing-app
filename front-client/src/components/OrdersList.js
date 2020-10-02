@@ -1,13 +1,12 @@
 import React from 'react';
 
 const OrdersList = ({ orders }) => {
-  console.log(orders);
-
   let allmyorders = [orders].map((order) => {
     return (
       <tr key={order.id}>
         <td>{order.ticket.title}</td>
         <td>{order.status}</td>
+        <td>{order.ticket.price}</td>
       </tr>
     );
   });
@@ -21,6 +20,7 @@ const OrdersList = ({ orders }) => {
             <tr>
               <th>Title</th>
               <th>Status</th>
+              <th>Price</th>
             </tr>
           </thead>
           <tbody>{allmyorders}</tbody>

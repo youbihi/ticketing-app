@@ -22,7 +22,8 @@ jobs:
         with:
           command: |
             cd /home/bitnami/ticketing-app/infra/k8s
-            kubectl apply -f .
+            kubectl apply -f expiration-depl.yaml
+            kubectl rollout restart deployment expiration-depl.yaml
           host: ${{ secrets.KOPS_PUBLIC_DNS }}
           user: bitnami
           key: ${{ secrets.MICROSERVICE_KOPS_KEYPAIR}}

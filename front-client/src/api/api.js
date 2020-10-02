@@ -28,4 +28,15 @@ export default {
     deleteById: (id) =>
       axios.delete(`/api/tickets/${id}`).then((res) => res.data),
   },
+  order: {
+    getall: () => axios.get(`/api/orders`).then((res) => res.data),
+    getById: (id) => axios.get(`/api/orders/${id}`).then((res) => res.data),
+    updateById: (id, order) =>
+      axios.put(`/api/orders/${id}`, { order }).then((res) => res.data),
+    create: (order) =>
+      axios.post('/api/orders', { order }).then((res) => res.data),
+
+    deleteById: (id) =>
+      axios.delete(`/api/orders/${id}`).then((res) => res.data),
+  },
 };
