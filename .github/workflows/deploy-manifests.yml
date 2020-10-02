@@ -33,6 +33,7 @@ jobs:
             kubectl apply -f .
             cd /home/bitnami/ticketing-app/infra/k8s-prod
             kubectl apply -f .
+            kubectl rollout restart deployment
           host: ${{ secrets.KOPS_PUBLIC_DNS }}
           user: bitnami
           key: ${{ secrets.MICROSERVICE_KOPS_KEYPAIR}}
