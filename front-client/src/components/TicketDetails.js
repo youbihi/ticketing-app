@@ -36,7 +36,9 @@ const TicketDetails = (ticket) => {
       <h1>Ticket details</h1>
       {ticketDetails.ticket ? (
         <div>
-          <h4>Title: {ticketDetails.ticket.title}</h4>
+          <h4>Departure: {ticketDetails.ticket.departure}</h4>
+          <h4>Arrival: {ticketDetails.ticket.arrival}</h4>
+          <h5>Description: {ticketDetails.ticket.title}</h5>
           <h4>Price: {ticketDetails.ticket.price} €</h4>
         </div>
       ) : null}

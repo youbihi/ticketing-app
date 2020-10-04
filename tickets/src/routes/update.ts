@@ -18,6 +18,8 @@ router.put(
   requireAuth,
   [
     body('title').not().isEmpty().withMessage('Title is required'),
+    body('departure').not().isEmpty().withMessage('departure is required'),
+    body('arrival').not().isEmpty().withMessage('arrival is required'),
     body('price')
       .isFloat({ gt: 0 })
       .withMessage('Price must be provided and must be greater than 0'),
@@ -40,12 +42,16 @@ router.put(
 
     ticket.set({
       title: req.body.title,
+      departure: req.body.departure,
+      arrival: req.body.arrival,
       price: req.body.price,
     });
     await ticket.save();
     new TicketUpdatedPublisher(natsWrapper.client).publish({
       id: ticket.id,
       title: ticket.title,
+      departure: ticket.departure,
+      arrival: ticket.arrival,
       price: ticket.price,
       userId: ticket.userId,
       version: ticket.version,

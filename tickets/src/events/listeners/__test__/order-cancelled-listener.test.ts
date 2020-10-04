@@ -11,6 +11,8 @@ const setup = async () => {
   const orderId = mongoose.Types.ObjectId().toHexString();
   const ticket = Ticket.build({
     title: 'concert',
+    departure: 'titi',
+    arrival: 'toto',
     price: 20,
     userId: 'asdf',
   });

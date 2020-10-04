@@ -12,6 +12,8 @@ const setup = async () => {
   // Create and save a ticket
   const ticket = Ticket.build({
     title: 'concert',
+    departure: 'titi',
+    arrival: 'toto',
     price: 99,
     userId: 'asdf',
   });

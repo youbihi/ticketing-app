@@ -1,21 +1,30 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 
-const OrdersList = ({ orders }) => {
-  let allmyorders = [orders].map((order) => {
-    console.log('all the orders: ', orders);
-    if (order.id) {
-      console.log('here is the order: ', order);
+const OrdersList = ({ orders, currentUser }) => {
+  const [orderList, setorderList] = useState([]);
+  const [User, setUser] = useState({});
+
+  console.log('orderList: ', orderList);
+
+  useEffect(() => {
+    setorderList(orders);
+    setUser(currentUser);
+  }, [orders, currentUser]);
+
+  const allmyorders = orderList
+    .filter((order) => order.userId == User.id)
+    .map((order) => {
       return (
         <tr key={order.id}>
+          <td>{order.ticket.departure}</td>
+          <td>{order.ticket.arrival}</td>
           <td>{order.ticket.title}</td>
           <td>{order.status}</td>
           <td>{order.ticket.price}</td>
         </tr>
       );
-    } else {
-      return null;
-    }
-  });
+    });
 
   return (
     <ul>
@@ -24,12 +33,14 @@ const OrdersList = ({ orders }) => {
         <table className="table">
           <thead>
             <tr>
-              <th>Title</th>
+              <th>Departure City</th>
+              <th>Arrival City</th>
+              <th>Description</th>
               <th>Status</th>
               <th>Price</th>
             </tr>
           </thead>
-          {allmyorders ? <tbody>{allmyorders}</tbody> : null}
+          <tbody>{allmyorders}</tbody>
         </table>
       </div>
     </ul>

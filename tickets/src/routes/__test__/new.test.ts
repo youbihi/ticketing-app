@@ -28,6 +28,8 @@ it('returns an error if an invalid title is provided', async () => {
     .set('Cookie', global.signin())
     .send({
       title: '',
+      departure: '',
+      arrival: '',
       price: 10,
     })
     .expect(400);
@@ -47,6 +49,8 @@ it('returns an error if an invalid price is provided', async () => {
     .set('Cookie', global.signin())
     .send({
       title: 'asldkjf',
+      departure: 'toto',
+      arrival: 'titi',
       price: -10,
     })
     .expect(400);
@@ -56,6 +60,8 @@ it('returns an error if an invalid price is provided', async () => {
     .set('Cookie', global.signin())
     .send({
       title: 'laskdfj',
+      departure: 'toto',
+      arrival: 'titi',
     })
     .expect(400);
 });
@@ -65,12 +71,16 @@ it('creates a ticket with valid inputs', async () => {
   expect(tickets.length).toEqual(0);
 
   const title = 'asldkfj';
+  const departure = 'toto';
+  const arrival = 'titi';
 
   await request(app)
     .post('/api/tickets')
     .set('Cookie', global.signin())
     .send({
       title,
+      departure,
+      arrival,
       price: 20,
     })
     .expect(201);
@@ -83,12 +93,16 @@ it('creates a ticket with valid inputs', async () => {
 
 it('publishes an event', async () => {
   const title = 'asldkfj';
+  const departure = 'toto';
+  const arrival = 'titi';
 
   await request(app)
     .post('/api/tickets')
     .set('Cookie', global.signin())
     .send({
       title,
+      departure,
+      arrival,
       price: 20,
     })
     .expect(201);

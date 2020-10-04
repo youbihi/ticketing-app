@@ -11,11 +11,11 @@ const HomePage = () => {
     api.ticket.getall().then((data) => setTickets_list(data));
   }, []);
 
-  console.log('state ticket list: ', tickets_list);
-
   const ticketList = tickets_list.map((ticket) => {
     return (
       <tr key={ticket.id}>
+        <td>{ticket.departure}</td>
+        <td>{ticket.arrival}</td>
         <td>{ticket.title}</td>
         <td>{ticket.price} €</td>
         <td>
@@ -34,7 +34,9 @@ const HomePage = () => {
       <table className="table">
         <thead>
           <tr>
-            <th>Title</th>
+            <th>Departure City</th>
+            <th>Arrival City</th>
+            <th>Description</th>
             <th>Price</th>
             <th>Link</th>
             <th>Owner ID</th>

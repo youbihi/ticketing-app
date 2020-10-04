@@ -9,7 +9,9 @@ it('returns a 404 if the ticket is not found', async () => {
 });
 
 it('returns the ticket if the ticket is found', async () => {
-  const title = 'concert';
+  const title = 'blabla';
+  const departure = 'toto';
+  const arrival = 'titi';
   const price = 20;
 
   const response = await request(app)
@@ -17,6 +19,8 @@ it('returns the ticket if the ticket is found', async () => {
     .set('Cookie', global.signin())
     .send({
       title,
+      departure,
+      arrival,
       price,
     })
     .expect(201);
@@ -27,5 +31,7 @@ it('returns the ticket if the ticket is found', async () => {
     .expect(200);
 
   expect(ticketResponse.body.title).toEqual(title);
+  expect(ticketResponse.body.departure).toEqual(departure);
+  expect(ticketResponse.body.arrival).toEqual(arrival);
   expect(ticketResponse.body.price).toEqual(price);
 });

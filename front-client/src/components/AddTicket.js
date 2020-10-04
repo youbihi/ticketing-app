@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
 import useRequest from '../hooks/use-request';
@@ -7,22 +6,22 @@ import { useHistory } from 'react-router-dom';
 
 const AddTicket = () => {
   let history = useHistory();
-  const dispatch = useDispatch();
 
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
+  const [departure, setDeparture] = useState('');
+  const [arrival, setArrival] = useState('');
+
   const { doRequest, errors } = useRequest({
     url: '/api/tickets',
     method: 'post',
     body: {
       title,
       price,
+      departure,
+      arrival,
     },
-    onSuccess: (ticket) =>
-      dispatch({
-        type: 'TICKET_CREATED',
-        ticket,
-      }).then(history.push('/')),
+    onSuccess: () => history.push('/'),
   });
 
   const onSubmit = (event) => {
@@ -46,7 +45,23 @@ const AddTicket = () => {
       <h1>Create a Ticket</h1>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label>Title</label>
+          <label>Departure City</label>
+          <input
+            value={departure}
+            onChange={(e) => setDeparture(e.target.value)}
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label>Arrival City</label>
+          <input
+            value={arrival}
+            onChange={(e) => setArrival(e.target.value)}
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label>Description</label>
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -54,7 +69,7 @@ const AddTicket = () => {
           />
         </div>
         <div className="form-group">
-          <label>Price</label>
+          <label>Price in €</label>
           <input
             value={price}
             onBlur={onBlur}

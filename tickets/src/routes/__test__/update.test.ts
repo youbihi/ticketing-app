@@ -11,6 +11,8 @@ it('returns a 404 if the provided id does not exist', async () => {
     .set('Cookie', global.signin())
     .send({
       title: 'aslkdfj',
+      departure: 'toto',
+      arrival: 'titi',
       price: 20,
     })
     .expect(404);
@@ -22,6 +24,8 @@ it('returns a 401 if the user is not authenticated', async () => {
     .put(`/api/tickets/${id}`)
     .send({
       title: 'aslkdfj',
+      departure: 'toto',
+      arrival: 'titi',
       price: 20,
     })
     .expect(401);
@@ -32,7 +36,9 @@ it('returns a 401 if the user does not own the ticket', async () => {
     .post('/api/tickets')
     .set('Cookie', global.signin())
     .send({
-      title: 'asldkfj',
+      title: 'aslkdfj',
+      departure: 'toto',
+      arrival: 'titi',
       price: 20,
     });
 
@@ -40,7 +46,9 @@ it('returns a 401 if the user does not own the ticket', async () => {
     .put(`/api/tickets/${response.body.id}`)
     .set('Cookie', global.signin())
     .send({
-      title: 'alskdjflskjdf',
+      title: 'aslkdfj',
+      departure: 'toto',
+      arrival: 'titi',
       price: 1000,
     })
     .expect(401);
@@ -53,7 +61,9 @@ it('returns a 400 if the user provides an invalid title or price', async () => {
     .post('/api/tickets')
     .set('Cookie', cookie)
     .send({
-      title: 'asldkfj',
+      title: 'aslkdfj',
+      departure: 'toto',
+      arrival: 'titi',
       price: 20,
     });
 
@@ -61,7 +71,9 @@ it('returns a 400 if the user provides an invalid title or price', async () => {
     .put(`/api/tickets/${response.body.id}`)
     .set('Cookie', cookie)
     .send({
-      title: '',
+      title: 'aslkdfj',
+      departure: '',
+      arrival: 'titi',
       price: 20,
     })
     .expect(400);
@@ -70,7 +82,9 @@ it('returns a 400 if the user provides an invalid title or price', async () => {
     .put(`/api/tickets/${response.body.id}`)
     .set('Cookie', cookie)
     .send({
-      title: 'alskdfjj',
+      title: 'aslkdfj',
+      departure: 'toto',
+      arrival: 'titi',
       price: -10,
     })
     .expect(400);
@@ -83,7 +97,9 @@ it('updates the ticket provided valid inputs', async () => {
     .post('/api/tickets')
     .set('Cookie', cookie)
     .send({
-      title: 'asldkfj',
+      title: 'aslkdfj',
+      departure: 'toto',
+      arrival: 'titi',
       price: 20,
     });
 
@@ -92,6 +108,8 @@ it('updates the ticket provided valid inputs', async () => {
     .set('Cookie', cookie)
     .send({
       title: 'new title',
+      departure: 'toto',
+      arrival: 'titi',
       price: 100,
     })
     .expect(200);
@@ -101,6 +119,8 @@ it('updates the ticket provided valid inputs', async () => {
     .send();
 
   expect(ticketResponse.body.title).toEqual('new title');
+  expect(ticketResponse.body.departure).toEqual('toto');
+  expect(ticketResponse.body.arrival).toEqual('titi');
   expect(ticketResponse.body.price).toEqual(100);
 });
 
@@ -111,8 +131,10 @@ it('publishes an event', async () => {
     .post('/api/tickets')
     .set('Cookie', cookie)
     .send({
-      title: 'asldkfj',
-      price: 20,
+      title: 'dsqdqsdqsd',
+      departure: 'toto',
+      arrival: 'titi',
+      price: 100,
     });
 
   await request(app)
@@ -120,6 +142,8 @@ it('publishes an event', async () => {
     .set('Cookie', cookie)
     .send({
       title: 'new title',
+      departure: 'toto',
+      arrival: 'titi',
       price: 100,
     })
     .expect(200);
@@ -134,8 +158,10 @@ it('rejects updates if the ticket is reserved', async () => {
     .post('/api/tickets')
     .set('Cookie', cookie)
     .send({
-      title: 'asldkfj',
-      price: 20,
+      title: 'qsdsqdqsdsd',
+      departure: 'toto',
+      arrival: 'titi',
+      price: 100,
     });
 
   const ticket = await Ticket.findById(response.body.id);
@@ -147,6 +173,8 @@ it('rejects updates if the ticket is reserved', async () => {
     .set('Cookie', cookie)
     .send({
       title: 'new title',
+      departure: 'toto',
+      arrival: 'titi',
       price: 100,
     })
     .expect(400);
