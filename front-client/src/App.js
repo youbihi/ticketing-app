@@ -12,16 +12,30 @@ import OrderDetailsPage from './pages/OrderDetailsPage';
 import AddTicketPage from './pages/AddTicketPage';
 import TicketDetailsPage from './pages/TicketDetailsPage';
 import SignoutPage from './pages/SignoutPage';
+import UserRoute from './components/routes/UserRoute';
+import GuestRoute from './components/routes/GuestRoute';
 
 const App = ({ location }) => {
-  console.log('cook');
+  const currentUser = useSelector((state) => state.user);
+  const isAuthenticated = !!currentUser.email;
+
   return (
     <div className="container">
       <Header currentUser={useSelector((state) => state.user)} />
 
       <Route location={location} path="/" exact component={HomePage} />
-      <Route location={location} path="/signup" exact component={SignupPage} />
-      <Route location={location} path="/signin" exact component={SigninPage} />
+      <GuestRoute
+        location={location}
+        path="/signup"
+        exact
+        component={SignupPage}
+      />
+      <GuestRoute
+        location={location}
+        path="/signin"
+        exact
+        component={SigninPage}
+      />
       <Route location={location} path="/orders" exact component={OrdersPage} />
       <Route
         location={location}
@@ -29,19 +43,19 @@ const App = ({ location }) => {
         exact
         component={SignoutPage}
       />
-      <Route
+      <UserRoute
         location={location}
         path="/orderdetails"
         exact
         component={OrderDetailsPage}
       />
-      <Route
+      <GuestRoute
         location={location}
         path="/addticket"
         exact
         component={AddTicketPage}
       />
-      <Route
+      <UserRoute
         location={location}
         path="/tickets/view-ticket"
         exact

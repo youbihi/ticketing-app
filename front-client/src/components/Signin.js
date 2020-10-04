@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import useRequest from '../hooks/use-request';
 import { useHistory } from 'react-router-dom';
@@ -53,6 +54,11 @@ const Signin = () => {
       </div>
       {errors}
       <button className="btn btn-primary">Sign In</button>
+      <div>----------------------------------------</div>
+      <div> Not Registered yet ? </div>
+      <Link to="/signup">
+        <a className="navbar-brand">Signup</a>
+      </Link>
     </form>
   );
 };
