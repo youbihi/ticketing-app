@@ -24,18 +24,8 @@ const App = ({ location }) => {
       <Header currentUser={useSelector((state) => state.user)} />
 
       <Route location={location} path="/" exact component={HomePage} />
-      <GuestRoute
-        location={location}
-        path="/signup"
-        exact
-        component={SignupPage}
-      />
-      <GuestRoute
-        location={location}
-        path="/signin"
-        exact
-        component={SigninPage}
-      />
+      <Route location={location} path="/signup" exact component={SignupPage} />
+      <Route location={location} path="/signin" exact component={SigninPage} />
       <Route location={location} path="/orders" exact component={OrdersPage} />
       <Route
         location={location}
@@ -49,7 +39,7 @@ const App = ({ location }) => {
         exact
         component={OrderDetailsPage}
       />
-      <GuestRoute
+      <Route
         location={location}
         path="/addticket"
         exact
