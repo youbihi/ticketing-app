@@ -55,7 +55,7 @@ const App = ({ location }) => {
         exact
         component={AddTicketPage}
       />
-      <UserRoute
+      <Route
         location={location}
         path="/tickets/view-ticket"
         exact
