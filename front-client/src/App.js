@@ -43,7 +43,7 @@ const App = ({ location }) => {
         exact
         component={SignoutPage}
       />
-      <UserRoute
+      <Route
         location={location}
         path="/orderdetails"
         exact
