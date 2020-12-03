@@ -1,12 +1,12 @@
 import { Subjects } from './subjects';
-import { OrderStatus } from './types/order-status';
+import { DeliverieStatus } from './types/deliverie-status';
 
-export interface OrderCreatedEvent {
-  subject: Subjects.OrderCreated;
+export interface DeliverieCreatedEvent {
+  subject: Subjects.DeliverieCreated;
   data: {
     id: string;
     version: number;
-    status: OrderStatus;
+    status: DeliverieStatus;
     userId: string;
     expiresAt: string;
     ticket: {

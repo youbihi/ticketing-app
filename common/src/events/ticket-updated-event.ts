@@ -10,6 +10,6 @@ export interface TicketUpdatedEvent {
     arrival: string;
     price: number;
     userId: string;
-    orderId?: string;
+    deliverieId?: string;
   };
 }
